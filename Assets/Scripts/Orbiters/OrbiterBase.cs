@@ -21,15 +21,16 @@ public class OrbiterBase : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = Vector3.zero;
+       
         Setup();
     }
     protected void Setup()
     {
         currentOrbit = startOrbit;
 
-        // Gives null reference exception for some reason
-        transform.RotateAround(Vector3.zero, transform.position + Vector3.forward * LevelScript.levelInstance.orbitDistance * startOrbit, startPosition);
+        transform.position = Vector3.zero;
+        transform.RotateAround(Vector3.zero,Vector3.forward, startPosition);
+        transform.position -= transform.up * LevelScript.levelInstance.orbitDistance * startOrbit;
 
     }
 

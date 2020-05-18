@@ -38,10 +38,11 @@ public class PlayerOrbiter : OrbiterBase
 
         transform.RotateAround(Vector3.zero, Vector3.forward, Input.GetAxis("Horizontal") * orbitSpeed * Time.deltaTime);
 
-        // The collision detection isnt working fukfapsodjfmlaksd
+        
         if (Input.GetAxis("Vertical") > 0 && orbitCooldownCounter > orbitJumpCooldown)
         {
-            if (forwardOrbiter.isObstructed)
+            // allow jump if on last orbit no matter what since everything is so tight together there.
+            if (forwardOrbiter.isObstructed && currentOrbit != 1)
             {
 
 
