@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3765181813933825210}
   - component: {fileID: 7721248809193654723}
   m_Layer: 0
-  m_Name: 1
+  m_Name: Orbit4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1351737459361005252}
   - component: {fileID: 1822172810410173371}
   m_Layer: 0
-  m_Name: 2
+  m_Name: Orbit3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2133111803947743152}
   - component: {fileID: 4077777466517347436}
   m_Layer: 0
-  m_Name: 32
+  m_Name: Orbit1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 4652295118741894160}
   - component: {fileID: 5952226649735636452}
   m_Layer: 0
-  m_Name: 3
+  m_Name: Orbit2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 5560357656704108193}
   - component: {fileID: 5871879331554447072}
   m_Layer: 0
-  m_Name: 4
+  m_Name: Orbit0_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
