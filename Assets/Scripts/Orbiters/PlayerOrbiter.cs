@@ -17,13 +17,24 @@ public class PlayerOrbiter : OrbiterBase
     [HideInInspector]
     public OrbitCheckerScript forwardOrbiter;
 
-   
+    public KeyCode orbitJumpKey;
+    public KeyCode changeDirectionKey;
+
+    private float currSpeed;
+
+    [SerializeField]
+        private BumperScript leftBumper;
+    [SerializeField]
+        private BumperScript rightBumper;
 
     // Start is called before the first frame update
     void Awake()
     {
         Setup();
 
+        leftBumper.myOrbiter = this;
+        rightBumper.myOrbiter = this;
+        currSpeed = orbitSpeed;
         life = maxLife;
         orbitCooldownCounter = 0;
         GameObject instantiated = Instantiate(forwardChecker, transform.position + transform.up * LevelScript.levelInstance.orbitDistance, transform.rotation,this.transform);
@@ -36,10 +47,31 @@ public class PlayerOrbiter : OrbiterBase
 
         orbitCooldownCounter += Time.deltaTime;
 
-        transform.RotateAround(Vector3.zero, Vector3.forward, Input.GetAxis("Horizontal") * orbitSpeed * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.forward, currSpeed * Time.deltaTime);
+        if (Input.GetKeyDown(changeDirectionKey))
+        {
+            print($"Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
 
+            if (currSpeed != 0)
+            {
+                currSpeed *= -1;
+                orbitSpeed *= -1;
+            }
+
+            else if (currSpeed == 0)
+            {
+                currSpeed = orbitSpeed;
+                currSpeed *= -1;
+                orbitSpeed *= -1;
+
+            }
+                
+
+
+        }
+            
         
-        if (Input.GetAxis("Vertical") > 0 && orbitCooldownCounter > orbitJumpCooldown)
+        if (Input.GetKeyDown(orbitJumpKey) && orbitCooldownCounter > orbitJumpCooldown)
         {
             // allow jump if on last orbit no matter what since everything is so tight together there.
             if (forwardOrbiter.isObstructed && currentOrbit != 1)
@@ -69,4 +101,14 @@ public class PlayerOrbiter : OrbiterBase
         }
 
     }
+
+    public override void BumperHIt(OrbiterBase other, bool rightSide)
+    {
+        
+       
+        currSpeed = 0;
+        print($"Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
+
+    }
+
 }

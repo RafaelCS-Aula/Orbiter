@@ -27,13 +27,15 @@ public class OrbiterBase : MonoBehaviour
     protected void Setup()
     {
         currentOrbit = startOrbit;
-
+        
         transform.position = Vector3.zero;
         transform.RotateAround(Vector3.zero,Vector3.forward, startPosition);
         transform.position -= transform.up * LevelScript.levelInstance.orbitDistance * startOrbit;
 
     }
 
- 
+    public virtual void BumperHIt(OrbiterBase other, bool rightSide){}
+
+
 
 }
