@@ -20,7 +20,7 @@ public class PlayerOrbiter : OrbiterBase
     public KeyCode orbitJumpKey;
     public KeyCode changeDirectionKey;
 
-    private float currSpeed;
+    public float currSpeed;
 
     [SerializeField]
         private BumperScript leftBumper;
@@ -34,7 +34,7 @@ public class PlayerOrbiter : OrbiterBase
 
         leftBumper.myOrbiter = this;
         rightBumper.myOrbiter = this;
-        currSpeed = orbitSpeed;
+        currSpeed = 0;
         life = maxLife;
         orbitCooldownCounter = 0;
         GameObject instantiated = Instantiate(forwardChecker, transform.position + transform.up * LevelScript.levelInstance.orbitDistance, transform.rotation,this.transform);
@@ -107,8 +107,15 @@ public class PlayerOrbiter : OrbiterBase
         
        
         currSpeed = 0;
-        print($"Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
+        if (other.GetType() == typeof(PlanetoidOrbiter) ||
+            other.GetType() == typeof(EnemyOrbitrer))
+        {
+            life--;
+            Setup();
+        }
 
     }
+
+
 
 }
