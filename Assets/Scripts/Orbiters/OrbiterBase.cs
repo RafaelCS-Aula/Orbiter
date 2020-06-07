@@ -18,6 +18,7 @@ public class OrbiterBase : MonoBehaviour
     [Header("PlayTime vars")]
     public int currentOrbit;
     public float orbitSpeed;
+    protected bool blockMovement = false;
 
     private void Awake()
     {
@@ -26,12 +27,14 @@ public class OrbiterBase : MonoBehaviour
     }
     protected void Setup()
     {
+        //blockMovement = true;
         currentOrbit = startOrbit;
         
         transform.position = Vector3.zero;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.RotateAround(Vector3.zero,Vector3.forward, startPosition);
         transform.position -= transform.up * LevelScript.levelInstance.orbitDistance * startOrbit;
-
+        //blockMovement = false;
     }
 
     public virtual void BumperHIt(OrbiterBase other, bool rightSide){}

@@ -12,7 +12,7 @@ public class OrbitCheckerScript : MonoBehaviour
     {
         isObstructed = true;
         obstructor = collision.gameObject;
-        Debug.Log("bonk");
+        //Debug.Log("bonk");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

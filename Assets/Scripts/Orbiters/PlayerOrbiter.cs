@@ -22,19 +22,22 @@ public class PlayerOrbiter : OrbiterBase
 
     public float currSpeed;
 
+    [SerializeField] private bool isImmortal = true;
+
     [SerializeField]
         private BumperScript leftBumper;
     [SerializeField]
         private BumperScript rightBumper;
 
     // Start is called before the first frame update
+    
     void Awake()
     {
         Setup();
 
         leftBumper.myOrbiter = this;
         rightBumper.myOrbiter = this;
-        currSpeed = 0;
+        currSpeed = orbitSpeed;
         life = maxLife;
         orbitCooldownCounter = 0;
         GameObject instantiated = Instantiate(forwardChecker, transform.position + transform.up * LevelScript.levelInstance.orbitDistance, transform.rotation,this.transform);
@@ -44,29 +47,32 @@ public class PlayerOrbiter : OrbiterBase
     // Update is called once per frame
     void Update()
     {
+        //print(orbitSpeed);
 
         orbitCooldownCounter += Time.deltaTime;
 
-        transform.RotateAround(Vector3.zero, Vector3.forward, currSpeed * Time.deltaTime);
+        if (!blockMovement)
+            transform.RotateAround(Vector3.zero, Vector3.forward, currSpeed * Time.deltaTime);
+
         if (Input.GetKeyDown(changeDirectionKey))
         {
-            print($"Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
+            print($"START Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
 
             if (currSpeed != 0)
             {
                 currSpeed *= -1;
                 orbitSpeed *= -1;
             }
-
             else if (currSpeed == 0)
             {
+                print("flip");
                 currSpeed = orbitSpeed;
                 currSpeed *= -1;
                 orbitSpeed *= -1;
 
             }
-                
 
+            print($"END Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
 
         }
             
@@ -83,6 +89,8 @@ public class PlayerOrbiter : OrbiterBase
             }
             else
             {
+
+                
                 transform.position += transform.up * LevelScript.levelInstance.orbitDistance;
                 orbitCooldownCounter = 0;
                 currentOrbit--;
@@ -95,7 +103,10 @@ public class PlayerOrbiter : OrbiterBase
 
         if (currentOrbit == 0)
             LevelScript.levelInstance.WinStage();
-        if (life <= 0)
+
+
+
+        if (life <= 0 && !isImmortal)
         {
             LevelScript.levelInstance.LoseStage();
         }
@@ -104,14 +115,23 @@ public class PlayerOrbiter : OrbiterBase
 
     public override void BumperHIt(OrbiterBase other, bool rightSide)
     {
-        
-       
-        currSpeed = 0;
+
+
+
+
         if (other.GetType() == typeof(PlanetoidOrbiter) ||
             other.GetType() == typeof(EnemyOrbitrer))
         {
             life--;
             Setup();
+
+
+
+        }
+        else
+        {
+            currSpeed = 0;
+
         }
 
     }

@@ -20,7 +20,7 @@ public class BumperScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("bonk");
+        //print("bonk");
         myOrbiter.BumperHIt(collision.gameObject.GetComponent<OrbiterBase>(), isRight);
 
     }
