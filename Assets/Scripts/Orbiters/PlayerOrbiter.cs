@@ -29,11 +29,15 @@ public class PlayerOrbiter : OrbiterBase
     [SerializeField]
         private BumperScript rightBumper;
 
+    private LivesManager livesManager;
+
     // Start is called before the first frame update
     
     void Awake()
     {
         Setup();
+
+        livesManager = FindObjectOfType<LivesManager>();
 
         leftBumper.myOrbiter = this;
         rightBumper.myOrbiter = this;
@@ -115,23 +119,17 @@ public class PlayerOrbiter : OrbiterBase
 
     public override void BumperHIt(OrbiterBase other, bool rightSide)
     {
-
-
-
-
         if (other.GetType() == typeof(PlanetoidOrbiter) ||
             other.GetType() == typeof(EnemyOrbitrer))
         {
             life--;
+            livesManager.DisableLife(maxLife - life - 1);
+
             Setup();
-
-
-
         }
         else
         {
             currSpeed = 0;
-
         }
 
     }

@@ -18,7 +18,7 @@ public class EnemyOrbitrer : OrbiterBase
         print(player);
     }
 
-    // Update is called once per frame  
+    // Update is called once per frame
     void Update()
     {
 
