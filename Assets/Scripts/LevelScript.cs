@@ -12,10 +12,6 @@ public class LevelScript : MonoBehaviour
     [SerializeField]private int currentStage = 0;
     [SerializeField] private GameObject currentStageObjects;
 
-    [Tooltip("Pls make sure you drag a scene asset into here this is beyond scuffed")]
-    [SerializeField] private Object victoryScene;
-    [SerializeField] private Object defeatScene;
-
     public static LevelScript levelInstance;
     // Start is called before the first frame update
     void Awake()
@@ -37,12 +33,10 @@ public class LevelScript : MonoBehaviour
             LoadStage(++currentStage);
         else
             // Doesnt work for some reason
-            SceneManager.LoadScene(victoryScene.name);
-
-
+            SceneManager.LoadScene("VictoryScene");
     }
                                 // Same problem as above
-    public void LoseStage() => SceneManager.LoadScene(defeatScene.name);
+    public void LoseStage() => SceneManager.LoadScene("DefeatScene");
         
 
     private void LoadStage(int stage)
@@ -50,7 +44,6 @@ public class LevelScript : MonoBehaviour
         Destroy(currentStageObjects);
         currentStageObjects = Instantiate(Stages[stage - 1]);
         Debug.Log("loading stage: " + stage);
-
     }
 
     private void OnDrawGizmos()

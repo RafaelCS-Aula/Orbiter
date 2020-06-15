@@ -51,8 +51,6 @@ public class PlayerOrbiter : OrbiterBase
     // Update is called once per frame
     void Update()
     {
-        //print(orbitSpeed);
-
         orbitCooldownCounter += Time.deltaTime;
 
         if (!blockMovement)
@@ -73,42 +71,25 @@ public class PlayerOrbiter : OrbiterBase
                 currSpeed = orbitSpeed;
                 currSpeed *= -1;
                 orbitSpeed *= -1;
-
             }
 
             print($"END Current speed: {currSpeed} -- Orbit Speed: {orbitSpeed}");
-
         }
-            
         
         if (Input.GetKeyDown(orbitJumpKey) && orbitCooldownCounter > orbitJumpCooldown)
         {
             // allow jump if on last orbit no matter what since everything is so tight together there.
-            if (forwardOrbiter.isObstructed && currentOrbit != 1)
+            if (!(forwardOrbiter.isObstructed && currentOrbit != 1))
             {
-
-
-
-
-            }
-            else
-            {
-
-                
                 transform.position += transform.up * LevelScript.levelInstance.orbitDistance;
                 orbitCooldownCounter = 0;
                 currentOrbit--;
-
-
+                currSpeed = orbitSpeed;
             }
-
-
         }
 
         if (currentOrbit == 0)
             LevelScript.levelInstance.WinStage();
-
-
 
         if (life <= 0 && !isImmortal)
         {
@@ -117,8 +98,9 @@ public class PlayerOrbiter : OrbiterBase
 
     }
 
-    public override void BumperHIt(OrbiterBase other, bool rightSide)
+    public override void BumperHit(OrbiterBase other, bool rightSide)
     {
+        Debug.Log("bonk");
         if (other.GetType() == typeof(PlanetoidOrbiter) ||
             other.GetType() == typeof(EnemyOrbitrer))
         {
@@ -127,13 +109,9 @@ public class PlayerOrbiter : OrbiterBase
 
             Setup();
         }
-        else
+        else if (other.GetType() == typeof(OrbiterBase))
         {
             currSpeed = 0;
         }
-
     }
-
-
-
 }

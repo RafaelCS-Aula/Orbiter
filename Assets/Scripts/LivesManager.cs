@@ -4,42 +4,33 @@ using UnityEngine;
 
 public class LivesManager : MonoBehaviour
 {
+    private ScreenSizeChecker screenSize;
     private RectTransform canvasRectTransf;
     private GameObject[] livesImages;
-    private Camera camera;
     [SerializeField] private GameObject lifePrefab;
 
     public GameObject[] LivesImages { get; }
 
+
     private void Awake()
     {
+        screenSize = GetComponentInParent<ScreenSizeChecker>();
         canvasRectTransf = GetComponentInParent<RectTransform>();
-        camera = FindObjectOfType<Camera>();
         livesImages = new GameObject[3];
 
         for(int i = 0; i < livesImages.Length; i++)
         {
             livesImages[i] = Instantiate<GameObject>(lifePrefab);
             livesImages[i].name = $"Life{i + 1}";
-            livesImages[i].transform.parent = transform;
+            livesImages[i].transform.SetParent(transform);
 
-            livesImages[i].transform.position = 
-                new Vector3( - (Screen.width / 3) * 2,
-                (Screen.height / 3) * (- i + 1), 0);
-            //livesImages[i].
+            //livesImages[i].transform.position = 
+            //    new Vector3( - (Screen.width / 3) * 2,
+            //    (Screen.height / 3) * (- i + 1), 0);
+            livesImages[i].transform.position = new Vector3(
+                - (screenSize.GetScreenToWorldWidth / 6) * 2.25f,
+                screenSize.GetScreenToWorldHeight / 3 * (- i + 1), 0);
         }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void DisableLife(int index)

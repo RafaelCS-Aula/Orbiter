@@ -37,7 +37,7 @@ public class OrbiterBase : MonoBehaviour
         //blockMovement = false;
     }
 
-    public virtual void BumperHIt(OrbiterBase other, bool rightSide){}
+    public virtual void BumperHit(OrbiterBase other, bool rightSide) {}
 
 
 

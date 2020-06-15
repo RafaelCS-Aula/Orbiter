@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2769714119476253676}
   m_Layer: 0
-  m_Name: DescerOrbita
+  m_Name: 1_DescerOrbita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,6 +38,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2769714119476253676}
     m_Modifications:
+    - target: {fileID: 6156645806934777641, guid: 1ad211b6da41b5c4dbf59c6951bd95aa,
+        type: 3}
+      propertyPath: isImmortal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6156645806934777642, guid: 1ad211b6da41b5c4dbf59c6951bd95aa,
         type: 3}
       propertyPath: m_LocalPosition.x

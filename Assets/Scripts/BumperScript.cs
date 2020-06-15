@@ -9,6 +9,8 @@ public class BumperScript : MonoBehaviour
     public OrbiterBase myOrbiter;
     public bool isRight;
 
+    private float previousSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class BumperScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //print("bonk");
-        myOrbiter.BumperHIt(collision.gameObject.GetComponent<OrbiterBase>(), isRight);
-
+        previousSpeed = myOrbiter.orbitSpeed;
+        myOrbiter.BumperHit(collision.gameObject.GetComponent<OrbiterBase>(), isRight);
     }
 }
