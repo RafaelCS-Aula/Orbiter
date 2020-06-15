@@ -9,6 +9,8 @@ public class LevelScript : MonoBehaviour
     public float orbitDistance = 100;
     public const int orbits = 4;
 
+    private SliderController sliderController;
+
     [SerializeField]private int currentStage = 0;
     [SerializeField] private GameObject currentStageObjects;
 
@@ -16,6 +18,8 @@ public class LevelScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        sliderController =
+            GameObject.Find("UI").GetComponentInChildren<SliderController>();
         if (levelInstance != null && levelInstance != this)
         {
             Destroy(this.gameObject);
@@ -30,7 +34,10 @@ public class LevelScript : MonoBehaviour
     public void WinStage()
     {
         if (currentStage < Stages.Count)
+        {
             LoadStage(++currentStage);
+            sliderController.ProgressSliderUpdate(currentStage - 1);
+        }
         else
             // Doesnt work for some reason
             SceneManager.LoadScene("VictoryScene");
