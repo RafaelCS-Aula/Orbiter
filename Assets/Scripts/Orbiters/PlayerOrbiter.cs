@@ -43,6 +43,7 @@ public class PlayerOrbiter : OrbiterBase
         rightBumper.myOrbiter = this;
         currSpeed = orbitSpeed;
         life = maxLife;
+        isImmortal = false;
         orbitCooldownCounter = 0;
         GameObject instantiated = Instantiate(forwardChecker, transform.position + transform.up * LevelScript.levelInstance.orbitDistance, transform.rotation,this.transform);
         forwardOrbiter = instantiated.GetComponent<OrbitCheckerScript>();

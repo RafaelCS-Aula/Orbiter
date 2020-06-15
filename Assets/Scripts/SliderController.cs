@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class SliderController : MonoBehaviour
     private void Awake()
     {
         //slider = new Slider();
-        progressSlider = new Slider().GetFirstOfType<Slider>();
+        progressSlider = GetComponent<Slider>();
     }
 
     public void ProgressSliderUpdate(int level)
